@@ -102,7 +102,7 @@ static cell_state check_winner(void) {
         return winner;
     }
 
-    printk(KERN_INFO "It's a tie! No winner.\n");
+    printk(KERN_INFO "It's a tie! No winner yet.\n");
     return EMPTY;
 }
 
@@ -156,7 +156,8 @@ static ssize_t board_write(struct file *f, const char __user *buf, size_t count,
     char u_comm[10]; // Buffer to store the user u_comm
     int row, col;
     cell_state player = X; // Initialize the player as X (assuming X always goes first)
-
+    cell_state winner;
+    
     if (count > sizeof(u_comm) - 1) {
         return -EINVAL; // If the u_comm length exceeds the buffer size, return -EINVAL (invalid argument)
     }
@@ -182,7 +183,7 @@ static ssize_t board_write(struct file *f, const char __user *buf, size_t count,
             // Check if the move is valid
             make_move(row, col, player); // Make the move for the current player
             
-            cell_state winner = check_winner(); // Call check_winner() to see if there's a winner
+            winner = check_winner(); // Call check_winner() to see if there's a winner
             
             if (winner == EMPTY) { // If there's no winner yet, let AI make its move
                 AI_move(); // Allow the AI to make its move
