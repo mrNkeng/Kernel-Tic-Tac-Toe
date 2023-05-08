@@ -1,0 +1,19 @@
+This code implements a Tic Tac Toe game in a Linux kernel module. 
+The game board is represented by a 3x3 array, and there are two 
+players, X and O. Users can interact with the game via a character 
+device, which supports reading the board state and writing commands 
+like TURN, RESET, and BOARD. The AI can make moves using a random 
+move generator. The code contains functions for resetting the board,
+checking for valid moves, making moves, checking for a winner, and 
+handling AI moves. It also implements read and write functions for 
+the character device, along with initialization and exit functions 
+for the kernel module. The kernel module is registered as a 
+miscellaneous character device, allowing users to interact with it 
+via file operations.
+
+Sources used:
+http://www.cprogrammingnotes.com/question/tic-tac-toe-game.html
+
+https://www.usna.edu/Users/cs/roche/courses/s17si204/notes/06/files.php?f=tictactoe.c
+
+Along with OpenAI to provide clarity on some logic errors and well as possible kernel functions for runtime optimization
