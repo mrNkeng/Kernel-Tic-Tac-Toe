@@ -7,10 +7,37 @@
 #include <linux/random.h> // generate random numbers
 #include <linux/module.h> // has definitions and function for kernel module development
 
+//Function Headers
+static ssize_t insp_read(struct file *file, char __user *buf, size_t count, loff_t *pos);
+static ssize_t insp_write(struct file *file, const char __user *buf, size_t count, loff_t *pos);
+static int __init insp_init(void);
+static void __exit insp_exit(void);
+
 MODULE_LICENSE("GPL"); //license under whick the kernel module is distributed
 MODULE_AUTHOR("Aminkeng Nkeng");
 MODULE_DESCRIPTION("This Kernel Module will inspire you");
 MODULE_VERSION("0.1"); // the version number
+
+// Specify and register the initialization and exit functions
+module_init(insp_init);
+module_exit(insp_exit);
+
+// definesFile operations for the character device
+//sets read and write callbacks to the functions created above
+static const struct file_operations inspiration_fops = {
+    .read = insp_read,
+    .write = insp_write,
+    .owner = THIS_MODULE, // the ownership of the structure is associated with the module itself so resources are not released prematurely while the structure is still in use
+};
+
+// Define the misc device for the character device
+static struct miscdevice insp_misc_dev = {
+    // sets the minor number of the charaacter device driver to be allocated dynamiclly
+    .minor = MISC_DYNAMIC_MINOR,
+    .name = "inspiration",
+    .fops = &inspiration_fops,
+    //sets character device name and then set file operation for character device
+};
 
 // Array of inspirational quotes
 static const char *quotes[] = {
@@ -76,39 +103,19 @@ static ssize_t insp_write(struct file *file, const char __user *buf, size_t coun
     return -EPERM; //permission denied
 }
 
-// definesFile operations for the character device
-//sets read and write callbacks to the functions created above
-static const struct file_operations inspiration_fops = {
-    .read = insp_read,
-    .write = insp_write,
-    .owner = THIS_MODULE, // the ownership of the structure is associated with the module itself so resources are not released prematurely while the structure is still in use
-};
-
-// Define the misc device for the character device
-static struct miscdevice inspiration_misc_device = {
-    // sets the minor number of the charaacter device driver to be allocated dynamiclly
-    .minor = MISC_DYNAMIC_MINOR,
-    .name = "inspiration",
-    .fops = &inspiration_fops,
-    //sets character device name and then set file operation for character device
-};
-
 // Initialization function for the kernel module
-static int __init inspiration_init(void) {
+static int __init insp_init(void) {
     int load;
     // Register the misc device
-    load = misc_register(&inspiration_misc_device);
+    load = misc_register(&insp_misc_dev);
     if (load)
         pr_err("Failed to register /dev/inspiration\n");
     return load;
 }
 
 // Exit function for the kernel module
-static void __exit inspiration_exit(void) {
+static void __exit insp_exit(void) {
     // Unregister the misc device
-    misc_deregister(&inspiration_misc_device);
+    misc_deregister(&insp_misc_dev);
 }
 
-// Specify and register the initialization and exit functions
-module_init(inspiration_init);
-module_exit(inspiration_exit);

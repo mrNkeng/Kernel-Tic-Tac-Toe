@@ -2,6 +2,9 @@ The proffessor told me there was no date for an initial commit so I assumed that
 I have been working on it incrementally but had some git issues and could not commit. 
 I tried everyhting but could not get the quotes to print on a newline after each iteration.
 
+COMMANDS:
+run with sudo cat /dev/inspiration
+
 The sources I used for part 1:
 
 https://www.brainyquote.com/profession/quotes-by-authors
