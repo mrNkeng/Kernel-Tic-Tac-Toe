@@ -1,2 +1,1 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/zJrSjYd4)
-Both Part 1 & 2 are working properly and the instructions to run them are in the README
+The tic-tac-toe code is located in 'part2' and all information regarding the project and its functionalities are located in the pt2README.
