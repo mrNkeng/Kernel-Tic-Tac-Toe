@@ -12,7 +12,7 @@ miscellaneous character device, allowing users to interact with it
 via file operations.
 
 COMMANDS:
-"sudo cat /dev/tictactoe":this shows the game grid
+"sudo cat /dev/tictactoe": this shows the game grid
 "echo "TURN 0 0" | sudo tee /dev/tictactoe > /dev/null": how to make a play
 "dmesg | tail" checks kernel log messages"
 "echo "RESET" | sudo tee /dev/tictactoe > /dev/null": rest the game
@@ -21,5 +21,3 @@ Sources used:
 http://www.cprogrammingnotes.com/question/tic-tac-toe-game.html
 
 https://www.usna.edu/Users/cs/roche/courses/s17si204/notes/06/files.php?f=tictactoe.c
-
-Along with OpenAI to provide clarity on some logic errors and well as possible kernel functions for runtime optimization
