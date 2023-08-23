@@ -1,1 +1,1 @@
-The tic-tac-toe code is located in 'part2' and all information regarding the project and its functionalities are located in the pt2README.
+The Tic-Tac-Toe implementation can be found in the 'part2' directory of this repository. Comprehensive details about the project, including its functionalities and features, are fully documented in the accompanying 'pt2README' file.
